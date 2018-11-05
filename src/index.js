@@ -1,8 +1,7 @@
-import React from 'react'
-import memize from 'memize'
-
-import storageChanged from 'storage-changed'
-import storageUtils from 'storage-utilities'
+const React = require('react')
+const memize = require('memize')
+const storageChanged = require('storage-changed')
+const storageUtils = require('storage-utilities')
 
 storageChanged('local')
 storageChanged('session')
@@ -40,10 +39,11 @@ const useStorage = (which, keys) => {
     const eventName = `${which}StorageChanged`
 
     const handler = event => {
-      setState({
-        ...state,
-        [event.detail.key]: event.detail.value,
-      })
+      event.detail.key in storage &&
+        setState({
+          ...state,
+          [event.detail.key]: event.detail.value,
+        })
     }
 
     addListener(eventName, handler)
@@ -56,4 +56,4 @@ const useStorage = (which, keys) => {
   return state
 }
 
-export default useStorage
+module.exports = useStorage

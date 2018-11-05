@@ -1,28 +1,36 @@
 {
   "name": "use-reactive-storage",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.0.1",
+  "description": "React hook for reacting to local/sessionStorage changes.",
+  "main": "index.js",
+  "reveal": true,
+  "scripts": {
+    "build": "babel ./src/index.js -o ./index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/colshacol/use-reactive-storage.git"
+  },
   "keywords": [],
-  "main": "src/index.js",
+  "author": {
+    "name": "Colton Colcleasure",
+    "email": "colshacol@gmail.com",
+    "url": "https://github.com/colshacol"
+  },
+  "license": "ISC",
+  "peerDependencies": {
+    "react": "^16.7.0-alpha.0"
+  },
   "dependencies": {
     "memize": "1.0.5",
-    "react": "^16.7.0-alpha.0",
-    "react-dom": "^16.7.0-alpha.0",
-    "react-scripts": "2.0.3",
     "storage-changed": "2.0.0",
     "storage-utilities": "0.0.0"
   },
-  "devDependencies": {},
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+  "devDependencies": {
+    "@babel/cli": "^7.0.0-beta.51",
+    "@babel/core": "^7.0.0-beta.51",
+    "@babel/preset-env": "^7.0.0-beta.51",
+    "babel-preset-minify": "^0.4.3"
+  }
 }
