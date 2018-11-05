@@ -1,6 +1,6 @@
 {
   "name": "use-reactive-storage",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "React hook for reacting to local/sessionStorage changes.",
   "main": "index.js",
   "reveal": true,
