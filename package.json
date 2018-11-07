@@ -2,10 +2,10 @@
   "name": "use-reactive-storage",
   "version": "0.0.3",
   "description": "React hook for reacting to local/sessionStorage changes.",
-  "main": "index.js",
+  "main": "./lib/index.js",
   "reveal": true,
   "scripts": {
-    "build": "babel ./src/index.js -o ./index.js",
+    "build": "babel ./src -d ./lib",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -28,21 +28,23 @@
     "storage-utilities": "0.0.2"
   },
   "devDependencies": {
-    "@babel/cli": "^7.0.0-beta.51",
-    "@babel/core": "^7.0.0-beta.51",
-    "@babel/preset-env": "^7.0.0-beta.51",
+    "@babel/cli": "7.1.5",
+    "@babel/core": "7.1.5",
+    "@babel/preset-env": "7.1.5",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^23.6.0",
-    "babel-preset-minify": "^0.4.3",
+    "babel-preset-minify": "^0.5.0",
     "jest": "^23.6.0",
     "jest-environment-jsdom-global": "^1.1.0",
     "jest-localstorage-mock": "^2.3.0",
-    "jsdom": "^13.0.0"
+    "jsdom": "^13.0.0",
+    "rollup": "^0.67.0",
+    "rollup-plugin-babel": "^4.0.3",
+    "rollup-plugin-commonjs": "^9.2.0",
+    "rollup-plugin-filesize": "^5.0.1",
+    "rollup-plugin-node-resolve": "^3.4.0"
   },
   "jest": {
-    "setupFiles": [
-      "jest-localstorage-mock"
-    ],
     "transform": {
       "^.+\\.jsx?$": "babel-jest"
     },

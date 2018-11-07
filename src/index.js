@@ -21,7 +21,7 @@ const useStorage = mems((...args) => {
 
 const useStorageHook = (which, keys) => {
   const storage = getStorageValues(window[`${which}Storage`], ...keys)
-  const [state, setState] = React.useState(storage)
+  const [state, setState] = useState(storage)
 
   useEffect(() => {
     const eventName = `${which}StorageChanged`

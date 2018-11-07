@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import useStorage from './'
+import useStorage from '../src'
 
 // FOR DEMO PURPOSES ONLY
 if (!localStorage.getItem('number')) {
