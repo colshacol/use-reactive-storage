@@ -3,6 +3,8 @@
 Making `localStorage` and `sessionStorage` reactive in the same tab that they are
 changed in is no easy task. But I got chu, fam.
 
+_Works with React 15+_
+
 ## Usage
 
 ```js
@@ -22,6 +24,22 @@ const Foo = () => {
     </div>
   )
 }
+```
+
+If you are using React 15, `use-reactive-storage` will still work,
+but it requires that you wrap your functional components with the
+`useStorage` function, as well.
+
+```js
+const Foo = useStorage(props => {
+  const local = useStorage('local', ['clickCount'])
+
+  return (
+    <div onClick={incrementClickCount}>
+      <p>click count: {local.clickCount}</p>
+    </div>
+  )
+})
 ```
 
 ```js

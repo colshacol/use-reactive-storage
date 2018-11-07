@@ -1,41 +1,29 @@
-const React = require('react')
-const memize = require('memize')
-const storageChanged = require('storage-changed')
-const storageUtils = require('storage-utilities')
+import mems from 'mems'
+import withHooks, { useState, useEffect } from 'react-with-hooks'
 
-storageChanged('local')
-storageChanged('session')
+import listener from './utilities/listener'
+import getStorageValues from './utilities/getStorageValues'
+import attachEventListeners from './utilities/attachEventListeners'
 
-const addListener = window.addEventListener
-const removeListener = window.removeEventListener
+// SIDE EFFECTS: Attaches window event listeners for
+// 'localStorageChanged' and 'sessionStorageChanged'.
+attachEventListeners()
 
-// Only ever runs one time when mounted and
-// one time when unmounting (if the effect
-// returns a function.)
-const usePureEffect = effect => {
-  return React.useEffect(effect, 0)
-}
+const useStorage = mems((...args) => {
+  // For use wrapping function components.
+  if (typeof args[0] === 'function') {
+    return withHooks(args[0])
+  }
 
-// Pulls the values out of the specified storage object,
-// parses them and returns the soon-to-be state object.
-const getStorageValues = memize((which, keys) => {
-  const storage = window[`${which}Storage`]
-
-  const final = keys.reduce((final, key) => {
-    final[key] = storageUtils.parse(storage[key])
-    return final
-  }, {})
-
-  final.setItem = storage.setItem
-
-  return final
+  // For use inside wrapped components.
+  return useStorageHook(...args)
 })
 
-const useStorage = (which, keys) => {
-  const storage = getStorageValues(which, keys)
+const useStorageHook = (which, keys) => {
+  const storage = getStorageValues(window[`${which}Storage`], ...keys)
   const [state, setState] = React.useState(storage)
 
-  usePureEffect(() => {
+  useEffect(() => {
     const eventName = `${which}StorageChanged`
 
     const handler = event => {
@@ -46,14 +34,11 @@ const useStorage = (which, keys) => {
         })
     }
 
-    addListener(eventName, handler)
-
-    return () => {
-      removeListener(eventName, handler)
-    }
-  })
+    return listener(eventName, handler)
+  }, 0) // Never re-run this effect.
 
   return state
 }
 
-module.exports = useStorage
+useStorage.withHooks = withHooks
+export default useStorage

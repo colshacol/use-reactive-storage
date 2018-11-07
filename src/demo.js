@@ -35,7 +35,7 @@ const resetSessionStorage = () => {
   sessionStorage.setItem('letters', '...')
 }
 
-const App = props => {
+const App = useStorage(props => {
   const local = useStorage('local', ['number'])
   const session = useStorage('session', ['letters'])
 
@@ -49,7 +49,7 @@ const App = props => {
       <button onClick={resetSessionStorage}>Reset SessionStorage</button>
     </div>
   )
-}
+})
 
 const rootElement = document.getElementById('root')
 ReactDOM.render(<App />, rootElement)
